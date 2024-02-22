@@ -7,7 +7,24 @@ const fetchUserProfile = async function () {
   const res = await fetch(`https://api.github.com/users/${username}`);
   const data = await res.json();
 
-  console.log(data);
+  displayUserInfo(data);
+};
+
+const displayUserInfo = function (json) {
+  const div = document.createElement("div");
+  div.classList.add("user-info");
+  div.innerHTML = `
+    <figure>
+      <img alt="user avatar" src=${json.avatar_url} />
+    </figure>
+    <div>
+      <p><strong>Name:</strong> ${json.name}</p>
+      <p><strong>Bio:</strong> ${json.bio}</p>
+      <p><strong>Location:</strong> ${json.location}</p>
+      <p><strong>Number of public repos:</strong> ${json.public_repos}</p>
+    </div>
+    `;
+  overview.append(div);
 };
 
 fetchUserProfile();
