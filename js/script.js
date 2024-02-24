@@ -1,5 +1,5 @@
 // ul  to display the repos list
-const reposList = document.querySelector(".repos-list");
+const reposList = document.querySelector(".repo-list");
 
 // div where your profile information will appear
 const overview = document.querySelector(".overview");
@@ -30,10 +30,22 @@ const displayUserInfo = function (json) {
     </div>
     `;
   overview.append(div);
+  fetchRepos();
 };
 
-const fetchRepo = async function () {
+const fetchRepos = async function () {
   const res = await fetch(`https://api.github.com/users/${username}/repos`);
   const json = await res.json();
-  // console.log(json);
+  console.log(json);
+
+  displayRepoInfo(json);
+};
+
+const displayRepoInfo = function (repos) {
+  repos.forEach(function (repo) {
+    const li = document.createElement("li");
+    li.classList.add("repo");
+    li.innerHTML = `<h3>${repo.name}</h3>`;
+    reposList.append(li);
+  });
 };
