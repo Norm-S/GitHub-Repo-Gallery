@@ -1,3 +1,9 @@
+// selects section where all repo info appears
+const repos = document.querySelector(".repos");
+
+// selects section where indiviual repo data will appear
+const repoData = document.querySelector(".repo-data");
+
 // ul  to display the repos list
 const reposList = document.querySelector(".repo-list");
 
