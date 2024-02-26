@@ -55,3 +55,10 @@ const displayRepoInfo = function (repos) {
     reposList.append(li);
   });
 };
+
+reposList.addEventListener("click", function (e) {
+  if (e.target.matches("h3")) {
+    const repoName = e.target.innerText;
+    console.log(repoName);
+  }
+});
