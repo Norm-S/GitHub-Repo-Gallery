@@ -1,13 +1,19 @@
+// selects "Back to Rep Gallery" button
+const button = document.querySelector(".view-repos");
+
+// selects input with the "Search by name" placeholder
+const filterInput = document.querySelector(".filter-repos");
+
 // selects section where all repo info appears
 const repos = document.querySelector(".repos");
 
 // selects section where indiviual repo data will appear
 const repoData = document.querySelector(".repo-data");
 
-// ul  to display the repos list
+// selects ul to display the repos list
 const reposList = document.querySelector(".repo-list");
 
-// div where your profile information will appear
+// selects div where your profile information will appear
 const overview = document.querySelector(".overview");
 
 const username = "Norm-S";
