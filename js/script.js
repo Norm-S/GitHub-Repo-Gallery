@@ -5,7 +5,7 @@ const button = document.querySelector(".view-repos");
 const filterInput = document.querySelector(".filter-repos");
 
 // selects section where all repo info appears
-const repos = document.querySelector(".repos");
+const reposSection = document.querySelector(".repos");
 
 // selects section where indiviual repo data will appear
 const repoData = document.querySelector(".repo-data");
@@ -107,12 +107,29 @@ const displayTargetRepoInfo = function (repoInfo, languages) {
 
   repoData.append(div);
   repoData.classList.remove("hide");
-  repos.classList.add("hide");
+  reposSection.classList.add("hide");
   button.classList.remove("hide");
 };
 
 button.addEventListener("click", function () {
-  repos.classList.remove("hide");
+  reposSection.classList.remove("hide");
   repoData.classList.add("hide");
   button.classList.add("hide");
+});
+
+filterInput.addEventListener("input", function (e) {
+  const searchField = e.target.value;
+  // console.log(searchField);
+
+  const repos = document.querySelectorAll(".repo");
+  const searchTerm = searchField.toLowerCase();
+
+  for (const repo of repos) {
+    const title = repo.innerText.toLowerCase();
+    if (title.includes(searchTerm)) {
+      repo.classList.remove("hide");
+    } else {
+      repo.classList.add("hide");
+    }
+  }
 });
