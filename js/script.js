@@ -48,12 +48,12 @@ const fetchRepos = async function () {
 };
 
 const displayRepoInfo = function (repos) {
-  repos.forEach(function (repo) {
+  for (const repo of repos) {
     const li = document.createElement("li");
     li.classList.add("repo");
     li.innerHTML = `<h3>${repo.name}</h3>`;
     reposList.append(li);
-  });
+  }
 };
 
 reposList.addEventListener("click", function (e) {
@@ -68,15 +68,36 @@ const getRepoInfo = async function (repoName) {
     `https://api.github.com/repos/${username}/${repoName}`
   );
   const repoInfo = await res.json();
-  console.log(repoInfo);
+  // console.log(repoInfo);
 
   const fetchLanguages = await fetch(`${repoInfo.languages_url}`);
   const languageData = await fetchLanguages.json();
   console.log(languageData);
 
   const languages = [];
-  for (let key in languageData) {
+  for (const key in languageData) {
     languages.push(key);
   }
-  console.log(languages);
+  // console.log(languages);
+
+  displayTargetRepoInfo(repoInfo, languages);
+};
+
+const displayTargetRepoInfo = function (repoInfo, languages) {
+  repoData.innerHTML = "";
+
+  const div = document.createElement("div");
+  div.innerHTML = `
+  <h3>Name: ${repoInfo.name}</h3>
+  <p>Description: ${repoInfo.description}</p>
+  <p>Default Branch: ${repoInfo.default_branch}</p>
+  <p>Languages: ${languages.join(", ")}</p>
+  <a class="visit" href="${
+    repoInfo.html_url
+  }" target="_blank" rel="noreferrer noopener">View Repo on GitHub!</a>
+  `;
+
+  repoData.append(div);
+  repoData.classList.remove("hide");
+  repos.classList.add("hide");
 };
