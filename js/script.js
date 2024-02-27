@@ -48,7 +48,7 @@ const displayUserInfo = function (json) {
 const fetchRepos = async function () {
   const res = await fetch(`https://api.github.com/users/${username}/repos`);
   const json = await res.json();
-  console.log(json);
+  // console.log(json);
 
   displayRepoInfo(json);
 };
@@ -60,6 +60,8 @@ const displayRepoInfo = function (repos) {
     li.innerHTML = `<h3>${repo.name}</h3>`;
     reposList.append(li);
   }
+
+  filterInput.classList.remove("hide");
 };
 
 reposList.addEventListener("click", function (e) {
@@ -78,7 +80,7 @@ const getRepoInfo = async function (repoName) {
 
   const fetchLanguages = await fetch(`${repoInfo.languages_url}`);
   const languageData = await fetchLanguages.json();
-  console.log(languageData);
+  // console.log(languageData);
 
   const languages = [];
   for (const key in languageData) {
