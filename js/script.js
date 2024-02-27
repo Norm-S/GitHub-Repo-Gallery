@@ -106,4 +106,11 @@ const displayTargetRepoInfo = function (repoInfo, languages) {
   repoData.append(div);
   repoData.classList.remove("hide");
   repos.classList.add("hide");
+  button.classList.remove("hide");
 };
+
+button.addEventListener("click", function () {
+  repos.classList.remove("hide");
+  repoData.classList.add("hide");
+  button.classList.add("hide");
+});
